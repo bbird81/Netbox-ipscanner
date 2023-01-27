@@ -25,7 +25,7 @@ class IpScan(Script):
             else:
                 return data[0]
 
-        nb = pynetbox.api('https://netbox.lutech.lab', token=TOKEN)
+        nb = pynetbox.api('https://your.netbox.address', token=TOKEN)
         nb.http_session.verify = False #disattiva il check del certificato
 
         subnets = nb.ipam.prefixes.all() #estrae tutti i prefissi, in formato x.x.x.x/yy
