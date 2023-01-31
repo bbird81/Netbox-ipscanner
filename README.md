@@ -6,6 +6,7 @@ ip scan script for populating IPAM module in Netbox
 ```
 sudo sh -c "echo 'ipcalc' >> /opt/netbox/local_requirements.txt"
 sudo sh -c "echo 'networkscan' >> /opt/netbox/local_requirements.txt"
+sudo sh -c "echo 'pynetbox' >> /opt/netbox/local_requirements.txt"
 sudo /opt/netbox/upgrade.sh
 sudo systemctl restart netbox netbox-rq
 ```
