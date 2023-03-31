@@ -11,8 +11,8 @@ sudo /opt/netbox/upgrade.sh
 sudo systemctl restart netbox netbox-rq
 ```
 2. Copy the script in netbox script directory (usually /opt/netbox/netbox/scripts/).
-3. Create a token in Netbox webgui and copy/paste it in variable TOKEN at line #4, so the script can write the DB using netbox API.
-4. Replace 'https://your.netbox.address' with your server address @line 28.
+3. Create a token in Netbox webgui and copy/paste it in variable TOKEN @ line #4, so the script can write the DB using netbox API.
+4. Replace 'https://your.netbox.address' with your server address in variable NETBOXURL @ line #6.
 
 That's all, you are ready to go :)
 
