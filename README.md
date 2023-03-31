@@ -17,5 +17,7 @@ sudo systemctl restart netbox netbox-rq
 That's all, you are ready to go :)
 
 # What it does exactly?
-Reads the prefixes in IPAM module and for each subnet makes a ping scan. Every responding address is added into the ip address IPAM module with DNS resolution. If an address exists in Netbox but is not pingable, it is marked as "Deprecated"; if DNS resolution is changed then it's updated.
-Subnets marked as "Reserved" are not scanned.
+1. Reads the prefixes in IPAM module and for each subnet makes a ping scan.
+2. Every responding address is added into the ip address IPAM module with DNS resolution.
+4. If an address exists in Netbox but is not pingable, it is marked as "Deprecated", if DNS resolution is changed then it's updated.
+5. Subnets marked as "Reserved" are not scanned.
