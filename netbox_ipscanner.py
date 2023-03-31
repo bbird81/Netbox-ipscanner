@@ -2,6 +2,9 @@ import pynetbox, urllib3, networkscan, socket, ipaddress
 from extras.scripts import Script
 
 TOKEN='xxx'
+
+NETBOXURL='https://your.netbox.address'
+	
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning) #disattiva i warning di sicurezza
 
 class IpScan(Script):
@@ -9,7 +12,7 @@ class IpScan(Script):
     class Meta:
         name = "IP Scanner"
         description = "Scans available prefixes and updates ip addresses in IPAM Module"
-    
+
     def run(self, data, commit):
 
         def reverse_lookup(ip):
@@ -25,7 +28,7 @@ class IpScan(Script):
             else:
                 return data[0]
 
-        nb = pynetbox.api('https://your.netbox.address', token=TOKEN)
+        nb = pynetbox.api(NETBOXURL, token=TOKEN)
         nb.http_session.verify = False #disattiva il check del certificato
 
         subnets = nb.ipam.prefixes.all() #estrae tutti i prefissi, in formato x.x.x.x/yy
@@ -39,7 +42,7 @@ class IpScan(Script):
             scan = networkscan.Networkscan(subnet)
             scan.run()
             self.log_info(f'Scansione di {subnet} eseguita.')
-	    
+
             #Routine per marcare come DEPRECATED ogni entry in Netbox che non risponda al ping
             for address in IPv4network.hosts(): #per ogni indirizzo della prefix x.x.x.x/yy...
 		        #self.log_debug(f'checking {address}...')
