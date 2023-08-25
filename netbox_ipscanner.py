@@ -68,7 +68,7 @@ class IpScan(Script):
                     if current_in_netbox.status.value != "active":
                         nb.ipam.ip_addresses.update([{'id':current_in_netbox.id, 'status':'active'},])
                     name = reverse_lookup(address1) # name resolution from DNS
-                    if current_in_netbox.dns_name == name: # the names in Netbox and DNS match, do nothing
+                    if current_in_netbox.dns_name.lower() == name.lower(): # the names in Netbox and DNS match, do nothing
                         pass
                     else: # the names in Netbox and in DNS *DO NOT* match --> update Netbox with DNS name
                         self.log_success(f'Name for {address1} updated to {name}')
