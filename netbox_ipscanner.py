@@ -65,7 +65,8 @@ class IpScan(Script):
                 current_in_netbox = nb.ipam.ip_addresses.get(address=ip_mask) # extract current data in Netbox related to ip
                 #self.log_debug(f'pinged ip: {address1} mask: {mask} --> {ip_mask} // extracted ip from netbox: {current_in_netbox}')
                 if current_in_netbox != None: # the pinged address is already present in the Netbox, mark it as Active and check the name if it has changed
-                    nb.ipam.ip_addresses.update([{'id':current_in_netbox.id, 'status':'active'},])
+                    if current_in_netbox.status.value != "active":
+                        nb.ipam.ip_addresses.update([{'id':current_in_netbox.id, 'status':'active'},])
                     name = reverse_lookup(address1) # name resolution from DNS
                     if current_in_netbox.dns_name == name: # the names in Netbox and DNS match, do nothing
                         pass
