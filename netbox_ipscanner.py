@@ -51,7 +51,7 @@ class IpScan(Script):
             # Routine to mark as DEPRECATED each Netbox entry that does not respond to ping
             for address in IPv4network.hosts(): # for each address of the prefix x.x.x.x/yy...
 		        #self.log_debug(f'checking {address}...')
-                netbox_address = netbox_addresses.get(address)
+                netbox_address = netbox_addresses.get(str(address)+mask)
                 if netbox_address != None: # if the ip exists in netbox // if none exists, leave it to discover
                     if str(netbox_address).rpartition('/')[0] in scan.list_of_hosts_found:  # if he is in the list of "alive"
                         pass # do nothing: It exists in NB and is in the pinged list: ok continue, you will see it later when you cycle the ip addresses that have responded whether to update something
